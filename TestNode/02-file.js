@@ -11,20 +11,22 @@ server.on('request', function (res, req) {
         req.end('<strong>Hello World!</strong>')
     } else if (url === '/favicon.ico') {
         req.end()
-    } else if (url === '/home'){
-        req.end('<strong>Welcome Home Page!</strong>')
-    } else if (url === '/haha'){
-        fs.readFile('./img/6.jpg',function(err,data){
-            if(err){
+    } else if (url === '/home') {
+        req.write('<strong>Welcome Home Page Start!</strong><br>')
+        req.write('<img src="haha" width="200" /><br>')
+        req.end('<strong>Welcome Home Page End!</strong>')
+    } else if (url === '/haha') {
+        fs.readFile('./img/6.jpg', function (err, data) {
+            if (err) {
                 console.log(err)
                 return req.end()
             }
-            req.writeHead(200,{
-                'Content-Type':'image/jpeg'
+            req.writeHead(200, {
+                'Content-Type': 'image/jpeg'
             })
             req.end(data)
         })
-    }else{
+    } else {
         req.end()
     }
 
