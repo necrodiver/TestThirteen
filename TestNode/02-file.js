@@ -13,6 +13,17 @@ server.on('request', function (res, req) {
         req.end()
     } else if (url === '/home'){
         req.end('<strong>Welcome Home Page!</strong>')
+    } else if (url === '/haha'){
+        fs.readFile('./img/6.jpg',function(err,data){
+            if(err){
+                console.log(err)
+                return req.end()
+            }
+            req.writeHead(200,{
+                'Content-Type':'image/jpeg'
+            })
+            req.end(data)
+        })
     }else{
         req.end()
     }
