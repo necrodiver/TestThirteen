@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>test</title>
+    <script src="https://unpkg.com/vue@1.0.20/dist/vue.js"></script>
+    <style>
+        /* 必需 */
+
+        .expand-transition {
+            transition: all .3s ease;
+            height: 30px;
+            padding: 10px;
+            background-color: #eee;
+            overflow: hidden;
+        }
+        /* .expand-enter 定义进入的开始状态 */
+        /* .expand-leave 定义离开的结束状态 */
+
+        .expand-enter,
+        .expand-leave {
+            height: 0;
+            padding: 0 10px;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-1">
+        <input v-model="msg" debounce="3000">
+    </div>
+    <hr>
+    <div class="app-2">
+        <div v-if="show" v-bind:transition="expand"></div>
+        <button v-bind:click="ceshi">Click</button>
+    </div>
+    <script>
+        var vue1 = new Vue({
+            //测试debounce延迟执行事件
+            el: '.app-1',
+            data: {
+                msg: 'message'
+            },
+            watch: {
+                msg: function () {
+                    alert(this.msg)
+                }
+            }
+        })
+        var vue2 = new Vue({
+            el: '.app-2',
+            data: {
+                show: true
+            },
+            methods: {
+                ceshi: function () {
+                    this.show = !this.show
+                }
+            }
+        })
+        Vue.transition('expand', {
+            beforeEnter: function (el) {
+                el.textContent = 'beforeEnter'
+            },
+            enter: function (el) {
+                el.textContent = 'enter'
+            },
+            afterEnter: function (el) {
+                el.textContent = 'afterEnter'
+            },
+            enterCancelled: function (el) {
+                //el.textContent=''
+            },
+            beforeLeave: function (el) {
+                el.textContent = 'beforeLeave'
+            },
+            leave: function (el) {
+                el.textContent = 'leave'
+            },
+            afterLeave: function (el) {
+                el.textContent = 'afterLeave'
+            },
+            leaveCancelled: function (el) {
+                // handle cancellation
+            }
+
+        })
+    </script>
+</body>
+
+</html>

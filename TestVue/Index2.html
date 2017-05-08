@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        select>option {
+            margin: 6px 10px;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@1.0.20/dist/vue.js"></script>
+</head>
+
+<body>
+    <select>
+            <option value="a">aa</option>
+            <option value="b">bb</option>
+            <option value="c">cc</option>
+            <option value="d">dd</option>
+        </select>
+    <hr>
+    <style type="text/css">
+        .font-1 {
+            font-size: 10px;
+        }
+        
+        .font-2 {
+            font-size: 12px;
+        }
+        
+        .font-3 {
+            font-size: 16px;
+        }
+        
+        .font-4 {
+            font-size: 18px;
+        }
+        
+        .font-5 {
+            font-size: 20px;
+        }
+        
+        .ceshi {
+            background-color: #ffc0cb;
+        }
+    </style>
+    <div id="app-1">
+        <p>{{message}}</p>
+        <p class="font-{{message}}">演示</p>
+        <p v-bind:class='{ceshi:isRight}'>给个数据显示下</p>
+        <p v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">测试颜色</p>
+        <input v-model='message'>
+    </div>
+    <div class="app-2">
+        <div v-bind:class="classObj">121212</div>
+    </div>
+    <div class="app-3">
+        <div v-bind:class="[activeClass,errorClass]"></div>
+    </div>
+    <div class="app-4">
+        <div v-bind:class="[{active:isActive},errorClass]"></div>
+    </div>
+    <script>
+        var vue1 = new Vue({
+            el: '#app-1',
+            data: {
+                message: '1',
+                isRight: true,
+                activeColor: 'pink',
+                fontSize: 20
+            }
+        })
+        var vue2 = new Vue({
+            el: '.app-2',
+            data: {
+                classObj: {
+                    active: true,
+                    'text-danger': false
+                }
+            },
+            computed: {
+                classObj: function () {
+                    return {
+                        active: this.isActive && !this.error,
+                        'text-danger': this.error && this.error.type === 'fatal'
+                    }
+                }
+            }
+        })
+
+        var vue3 = new Vue({
+            el: '.app-3',
+            data: {
+                activeClass: 'active',
+                errorClass: 'text-danger'
+            }
+        })
+        var vue4 = new Vue({
+            el: '.app-4',
+            data: {
+                isActive: true,
+                errorClass: 'sasasaT'
+            }
+        })
+    </script>
+</body>
+
+</html>

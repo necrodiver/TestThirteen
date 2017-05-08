@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <!--<script src="https://unpkg.com/vue@2.3.2/dist/vue.js"></script>-->
+    <script src="https://unpkg.com/vue@1.0.20/dist/vue.js"></script>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div id="app-1">
+        {{message}}
+    </div>
+    <hr />
+    <div id="app-2">
+        <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+    <hr/>
+    <div id="app-3">
+        <p>{{ message +'121231314'}}</p>
+        <input v-model="message" />
+    </div>
+    <hr>
+    <div id="app-4">
+        <p>{{message.split('').reverse().join('')}}</p>
+        <input v-model='message'>
+    </div>
+    <hr/>
+    <div id="app-5">
+        <ul v-for="item in items">
+            <li>{{ps}} - {{ $index }} - {{item.text}}</li>
+        </ul>
+    </div>
+    <hr/>
+    <div id="app-6">
+        <strong v-if="ok">YES</strong>
+        <strong v-else>NO</strong>
+        <small v-show="!ok">Don't OK</small>
+    </div>
+    <hr/>
+    <div id="app-7">
+        <p>{{message|reverse|uppercase}}</p>
+        <input v-model="message">
+    </div>
+    <hr/>
+    <div id="app-8">
+        <ul v-for="item in items">
+            <li>
+                <span>{{item.value}}</span>
+                <button v-on:click="removeThis($index)">X</button>
+            </li>
+        </ul>
+        <p>{{* message}}</p>
+        <input v-model="message">
+        <button v-on:click="clickT()">{{message}}</button>
+    </div>
+    <script>
+        function Init() {
+            var app = new Vue({
+                el: '#app-1',
+                data: {
+                    message: 'Hello Vue!'
+                }
+            })
+            var app2 = new Vue({
+                el: '#app-2',
+                data: {
+                    message: '页面加载于 ' + new Date()
+                }
+            })
+            var app3 = new Vue({
+                el: '#app-3',
+                data: {
+                    message: '页面加载于:' + new Date().getDate()
+                }
+            })
+            var app4 = new Vue({
+                el: '#app-4',
+                data: {
+                    message: '页面倒叙，试一试'
+                }
+            })
+            var app5 = new Vue({
+                el: '#app-5',
+                data: {
+                    ps: '展示一下',
+                    items: [{
+                        text: '123123'
+                    }, {
+                        text: 'adre4s'
+                    }, {
+                        text: '4hwffs'
+                    }, {
+                        text: 'yjhsef'
+                    }]
+                }
+            })
+            var app6 = new Vue({
+                el: '#app-6',
+                data: {
+                    ok: false
+                }
+            })
+
+            Vue.filter('reverse', function (value) {
+                return value.split('').reverse().join('')
+            })
+
+            var app7 = new Vue({
+                el: '#app-7',
+                data: {
+                    message: '测一把'
+                }
+            })
+            var app8 = new Vue({
+                el: '#app-8',
+                data: {
+                    message: '测一把',
+                    items: [{ value: 'sdfa' }, { value: 'gvsswrf' }, { value: 'hgingna' }]
+                },
+                methods: {
+                    clickT: function () {
+                        this.message = this.message.split('').reverse().join('')
+                    },
+                    removeThis: function (index) {
+                        this.items.splice(index, 1)
+                    }
+                },
+                watch:{
+                    message:function(newVal,oldVal){
+                        console.log('new:'+newVal+'||old:'+oldVal)
+                    }
+                }
+            })
+        }
+
+        Init()
+    </script>
+</body>
+
+</html>

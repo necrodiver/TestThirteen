@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://unpkg.com/vue@1.0.20/dist/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="app-1">
+        <!--<my-component class="baz boo"></my-component>-->
+    </div>
+    <hr>
+    <div class="app-2">
+        <input v-model="firstName" placeholder="{{fNameHint}}">+<input v-model="lastName" placeholder="{{lNameHint}}">
+        <strong>{{fullName}}</strong>
+    </div>
+    <hr>
+    <div class="app-3">
+        <input v-model="firstName" placeholder="{{fNameHint}}">+<input v-model="lastName" placeholder="{{lNameHint}}">
+        <input v-model="fullName">
+    </div>
+    <hr>
+    <div class="app-4">
+        <div v-bind:style="styleTest">
+            数据测试
+        </div>
+    </div>
+    <div class="app-5">
+        <ul v-for="(index,item) in items">
+            <li>
+                {{index}} - {{$index}} - {{item.message}}
+            </li>
+        </ul>
+        <hr>
+        <ul v-for="(index,item) of items" track-by='message'>
+            <li>
+                {{index}} - {{$index}} - {{item.message}}
+            </li>
+        </ul>
+        <hr> -----------、、、、、、、、、、、、、、、----------
+        <div>
+            {-{---items.push({message:'Baz'})---}-}
+        </div>
+    </div>
+    <hr>
+    <div class="app-6">
+        {{name}}
+        <button v-on:click="greet(message,$event)">greet</button>
+    </div>
+    <hr>
+    <div class="app-7">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{checked}}</label>
+    </div>
+    <hr>
+    <div class="app-8">
+        <input type="checkbox" id="a" value="a" v-model="checkedNames">
+        <label for="a">a</label>
+        <input type="checkbox" id="b" value="b" v-model="checkedNames">
+        <label for="b">b</label>
+        <input type="checkbox" id="c" value="c" v-model="checkedNames">
+        <label for="c">c</label>
+        <span>Check Names:{{checkedNames|json}}</span>
+        <hr>
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+        <hr>
+        <select v-model="selected">
+            <option value="aaa" selected>A</option>
+            <option value="bbb">B</option>
+            <option value="ccc">C</option>
+        </select>
+        <span>selected:{{selected}}</span>
+        <hr>
+        <select v-model="selected">
+            <option v-for="option in options" v-bind:value="option.value">
+                {{ option.text }}
+            </option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <script>
+        var vue1 = new Vue({
+            el: '.app-1',
+            data: {}
+        })
+        var vue2 = new Vue({
+            el: '.app-2',
+            data: {
+                firstName: '',
+                lastName: '',
+                fNameHint: '请输入姓',
+                lNameHint: '请输入名'
+            },
+            computed: {
+                fullName: function () {
+                    return this.firstName + ' ' + this.lastName
+                }
+            }
+        })
+        var vue3 = new Vue({
+            el: '.app-3',
+            data: {
+                firstName: '',
+                lastName: '',
+                fNameHint: '请输入姓',
+                lNameHint: '请输入名'
+            },
+            computed: {
+                fullName: {
+                    // getter
+                    get: function () {
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    // setter
+                    set: function (newValue) {
+                        var names = newValue.split(' ');
+                        this.firstName = names[0].trim();
+                        if (names.length > 1)
+                            this.lastName = names[names.length - 1].trim();
+                    }
+                }
+            }
+        })
+        var vue4 = new Vue({
+            el: '.app-4',
+            data: {
+                styleTest: {
+                    color: 'pink',
+                    fontSize: '20px'
+                }
+            }
+        })
+        var vue5 = new Vue({
+            el: '.app-5',
+            data: {
+                items: [
+                    { message: 'Foo' },
+                    { message: 'Bar' },
+                    { message: 'Tao' }
+                ]
+            }
+        })
+        vue5.items.$set(3, { message: 'Qiu' })
+        // vue5.items = vue5.items.filter(function (item) {
+        //     return item.message.match(/Tao/)
+        // })
+        var vue6 = new Vue({
+            el: '.app-6',
+            data: {
+                name: 'Vue.js',
+                message: 'hello '
+            },
+            methods: {
+                greet: function (message, event) {
+                    alert(message + this.name + '!')
+                    alert(event.target.tagName)
+                }
+            }
+        })
+        var vue7 = new Vue({
+            el: '.app-7',
+            data: {
+                checked: true
+            }
+        })
+        var vue8 = new Vue({
+            el: '.app-8',
+            data: {
+                checkedNames: [],
+                options: [
+                    { text: 'One', value: 'A' },
+                    { text: 'Two', value: 'B' },
+                    { text: 'Three', value: 'C' }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>
