@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>组件</title>
+    <script src="https://unpkg.com/vue@1.0.20/dist/vue.js"></script>
+</head>
+
+<body>
+    <div class="app-1">
+        <my-strong></my-strong>
+    </div>
+    <script>
+        var MyComponent = Vue.extend({
+            template: '<strong>测一下App-1</strong>'
+        })
+        Vue.component('my-strong', MyComponent)
+        new Vue({
+            el:'.app-1'
+        })
+    </script>
+</body>
+
+</html>
