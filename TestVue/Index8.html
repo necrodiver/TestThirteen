@@ -65,6 +65,81 @@
             el: '.app-3'
         })
     </script>
+    <div class="app-4">
+        <div>{{a}}</div>
+    </div>
+    <script>
+        var data = Vue.extend({
+            data: function () {
+                return { a: '哇哈哈哈哈' }
+            }
+        })
+        Vue.component('aa', data)
+        var vue4 = new Vue({
+            el: '.app-4'
+        })
+    </script>
+    <div class="app-5">
+        <child msg="Hello!"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['msg'],
+            template: '<span>{{ msg }}</span>'
+        })
+        var vue4 = new Vue({
+            el: '.app-5'
+        })
+    </script>
+    <div class="app-6">
+        <child my-message="World!"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['myMessage'],
+            template: '<strong>{{myMessage}}</strong>'
+        })
+        var vue5 = new Vue({
+            el: '.app-6'
+        })
+    </script>
+    <div class="app-7">
+        <input v-model="msg">
+        <child :my-msg="msg"></child>
+        <hr>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['myMsg'],
+            template: '<strong>{{myMsg}}</strong>'
+        })
+        var vue7 = new Vue({
+            el: '.app-7',
+            msg: ''
+        })
+    </script>
+    <hr>
+    <div class="app-8">
+        <input v-model="parentMsg"><br>
+        <!-- 默认为单向绑定 -->
+        <child :msg="parentMsg"></child><br>
+        <!-- 双向绑定 -->
+        <child :msg.sync="parentMsg"></child><br>
+        <!-- 单次绑定 -->
+        <child :msg.once="parentMsg"></child>
+    </div>
+    <script>
+        Vue.component('child', {
+            props: ['msg'],
+            template: '<strong>{{msg}}</strong>'
+        })
+        var vue8 = new Vue({
+            el: '.app-8',
+            data: {
+                parentMsg: 'wahaha'
+            }
+        })
+    </script>
 </body>
 
 </html>
