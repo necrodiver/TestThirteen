@@ -5,7 +5,7 @@
 > - Ctrl+Shift+P 输入CTR，选择任务：配置任务运行程序  
 > - 然后在.vscode文件夹下会创建一个tasks.json，选择配置  
 > - ``` "version": "0.1.0",
->        "command": "Chrome",
+>    "command": "Chrome",
 >    "windows": {
 >       "command": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
 >   },
