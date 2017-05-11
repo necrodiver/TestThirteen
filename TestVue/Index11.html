@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>$.extend</title>
+    <script src="../js/jquery-3.2.1.js"></script>
+</head>
+
+<body>
+    <script>
+        var a = {
+            name: null,
+            age: 25,
+            message: '测一下试试'
+        }, b = {
+            name: '张三',
+            age: 10,
+            message: ''
+        }, c = {
+            name: '李四',
+            message: '再测一下'
+        }
+        var d = $.extend({}, b, c)
+        //也就是说后面的参数如果和前面的参数存在相同的名称，那么后面的会覆盖前面的参数值
+    </script>
+</body>
+
+</html>
