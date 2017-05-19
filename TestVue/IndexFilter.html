@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <title>测一下过滤器</title>
+    <script src="https://unpkg.com/vue@1.0.20/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app-1">
+        <input v-model="phoneNum|Mask" />
+    </div>
+    <script>
+        var app1 = new Vue({
+            el: '#app-1',
+            data: {
+                phoneNum: '11413141421'
+            },
+            filters: {
+                Mask: function (v) {
+                    var str = v;
+                    var begin = 3;
+                    var end = 7;
+                    var char = '*';
+                    if (!str || str.length == 0 || str.length < end) {
+                        return "";
+                    }
+                    var fstStr = str.substring(0, begin);
+                    var scdStr = str.substring(begin, end);
+                    var lstStr = str.substring(end, str.length);
+                    var pace = function () {
+                        var str = "";
+                        for (var i = 0; i < end - begin; i++) {
+                            str += char;
+                        }
+                        return str;
+                    };
+                    return fstStr + scdStr.replace(scdStr, pace()) + lstStr;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

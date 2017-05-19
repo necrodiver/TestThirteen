@@ -1,0 +1,54 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MarkDown转换</title>
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="showdown.js"></script>
+    <style type="text/css">
+        .content {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .c-left,
+        .c-right {
+            float: left;
+            width: 450px;
+            height: 500px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #eee;
+        }
+
+        .c-right {
+            height: auto;
+        }
+
+        #input {
+            width: 450px;
+            height: 500px;
+            resize: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="c-left">
+            <textarea id="input"></textarea>
+        </div>
+        <div class="c-right">
+
+        </div>
+    </div>
+    <script>
+        var converter = new showdown.Converter();
+        setInterval(function () {
+            $('.c-right').html(converter.makeHtml($('#input').val()));
+        }, 3000)
+    </script>
+</body>
+
+</html>
